@@ -25,11 +25,25 @@ import java.time.format.DateTimeFormatter
 fun main() {
 
     // Test
-    val tarea1 = Tarea(1, Tarea.Estado.PENDIENTE, "Primera tarea")
-    println( tarea1.toString())
+    //val tarea1 = Tarea(1, Tarea.Estado.PENDIENTE, "Primera tarea")
+    //println( tarea1.toString())
 
     val tareas = ListaTareas()
     tareas.agregarTarea("Tarea 2")
+    tareas.agregarTarea("Tarea 3")
+    tareas.agregarTarea("Tarea 4")
+    tareas.agregarTarea("Tarea 5")
+    tareas.agregarTarea("Tarea 6")
+
+    println("Cambiado estado...")
+    tareas.cambiarEstado(2)
+    tareas.cambiarEstado(3)
+    tareas.cambiarEstado(5)
+
+    tareas.mostrarTodasTareas()
+    tareas.mostrarTareasPend()
+    tareas.mostrarTareasRealizadas()
+
 
 
 

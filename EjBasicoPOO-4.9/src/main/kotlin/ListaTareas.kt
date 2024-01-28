@@ -1,7 +1,18 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 class ListaTareas {
 
     var listaTareas: MutableList<Tarea> = mutableListOf()
     var ids = 1
+
+
+    // Ejemplo fecha
+    val fechaHoraActual: LocalDateTime = LocalDateTime.now()
+    // Formatear la fecha y hora para imprimir
+    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+    val fechaFormateada: String = fechaHoraActual.format(formatter)
+
 
     /**
      * Agrega una nueva tarea a la lista. Por defecto pendiente
@@ -10,8 +21,9 @@ class ListaTareas {
     fun agregarTarea(descripcion: String){
         val tarea = Tarea(ids++, Tarea.Estado.PENDIENTE, descripcion)
         listaTareas.add(tarea)
-        println("Tarea $tarea Agregada correctamente.")
+        println("Tarea con ID ${tarea.id} y descripcion: ${tarea.descripcion} - Agregada correctamente.")
     }
+
 
     /**
      * Busca la tarea con el id deseado y si existe, elimina la tarea.
@@ -27,6 +39,7 @@ class ListaTareas {
         }
     }
 
+
     /**
      * Busca si existe la tarea con el ID deseado, y cambia su estado
      * @param cod Id de la tarea a buscar
@@ -41,16 +54,36 @@ class ListaTareas {
         }
     }
 
+    /**
+     * Muestra un listado de todas la tareas realizadas/por realizar. Incluye ID, Descripcion y estado
+     */
     fun mostrarTodasTareas(){
-
+        println("Lista completa de tareas: ")
+        for (tarea in listaTareas){
+            if (tarea.estado == Tarea.Estado.REALIZADA){
+                println("ID: ${tarea.id} - Descripcion: ${tarea.descripcion} - Estado: ${tarea.estado} - Fecha realizacion: $fechaFormateada")
+            }else{
+            println("ID: ${tarea.id} - Descripcion: ${tarea.descripcion} - Estado: ${tarea.estado}")}
+        }
     }
 
-
+    /**
+     * Muestra un listado de las tareas pendientes. Incluye ID, Descripcion y estado
+     */
     fun mostrarTareasPend(){
-
+        println("Lista de tareas pendientes: ")
+        for (tarea in listaTareas){
+            if (tarea.estado == Tarea.Estado.PENDIENTE){
+                println("ID: ${tarea.id} - Descripcion: ${tarea.descripcion} - Estado: ${tarea.estado}")
+            }
+        }
     }
 
+    /**
+     * Muestra un listado de las tares realizadas. Incluye ID, Descripcion, estado y su hora de realizacion
+     */
     fun mostrarTareasRealizadas(){
-
+        println("Lista de tareas realizadas: ")
+        listaTareas.filter { it.estado == Tarea.Estado.REALIZADA }.forEach {tarea ->  println("ID: ${tarea.id} - Descripcion: ${tarea.descripcion} - Estado: ${tarea.estado} - Fecha realizacion: $fechaFormateada") }
     }
 }
