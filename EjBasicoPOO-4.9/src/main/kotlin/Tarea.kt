@@ -6,12 +6,13 @@ import java.time.format.DateTimeFormatter
  */
 class Tarea (val id: Int, var estado: Estado, val descripcion: String ) {
 
-    enum class Estado {PENDIENTE, REALIZADA}
 
 
     fun realizarTarea(){
         if (this.estado == Estado.PENDIENTE){
             estado = Estado.REALIZADA
+        }else{
+            estado = Estado.PENDIENTE
         }
     }
 

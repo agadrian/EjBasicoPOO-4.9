@@ -19,7 +19,7 @@ class ListaTareas {
      * @param descripcion Descripcion de la tarea en si
      */
     fun agregarTarea(descripcion: String){
-        val tarea = Tarea(ids++, Tarea.Estado.PENDIENTE, descripcion)
+        val tarea = Tarea(ids++, Estado.PENDIENTE, descripcion)
         listaTareas.add(tarea)
         println("Tarea con ID -${tarea.id}- y descripcion -${tarea.descripcion}- agregada correctamente.")
     }
@@ -61,7 +61,7 @@ class ListaTareas {
         if (listaTareas.isNotEmpty()) {
             println("Lista completa de tareas: ")
             for (tarea in listaTareas) {
-                if (tarea.estado == Tarea.Estado.REALIZADA) {
+                if (tarea.estado == Estado.REALIZADA) {
                     println("ID: ${tarea.id} - Descripcion: ${tarea.descripcion} - Estado: ${tarea.estado} - Fecha realizacion: $fechaFormateada")
                 } else {
                     println("ID: ${tarea.id} - Descripcion: ${tarea.descripcion} - Estado: ${tarea.estado}")
@@ -77,7 +77,7 @@ class ListaTareas {
         if (listaTareas.isNotEmpty()) {
             println("Lista de tareas pendientes: ")
             for (tarea in listaTareas) {
-                if (tarea.estado == Tarea.Estado.PENDIENTE) {
+                if (tarea.estado == Estado.PENDIENTE) {
                     println("ID: ${tarea.id} - Descripcion: ${tarea.descripcion} - Estado: ${tarea.estado}")
                 }
             }
@@ -91,7 +91,7 @@ class ListaTareas {
     fun mostrarTareasRealizadas(){
         if (listaTareas.isNotEmpty()) {
             println("Lista de tareas realizadas: ")
-            listaTareas.filter { it.estado == Tarea.Estado.REALIZADA }.forEach { tarea -> println("ID: ${tarea.id} - Descripcion: ${tarea.descripcion} - Estado: ${tarea.estado} - Fecha realizacion: $fechaFormateada") }
+            listaTareas.filter { it.estado == Estado.REALIZADA }.forEach { tarea -> println("ID: ${tarea.id} - Descripcion: ${tarea.descripcion} - Estado: ${tarea.estado} - Fecha realizacion: $fechaFormateada") }
         }else println("No hay tareas realizadas.")
     }
 }
