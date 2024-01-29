@@ -2,7 +2,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 /**
- *
+ *Clase Tarea que crea las tareas con una id, descripcion y estado
  */
 class Tarea (val id: Int, var estado: Estado, val descripcion: String ) {
 
@@ -14,12 +14,5 @@ class Tarea (val id: Int, var estado: Estado, val descripcion: String ) {
             estado = Estado.REALIZADA
         }
     }
-
-//    override fun toString(): String {
-//        if (estado == Estado.REALIZADA){
-//            return "ID: ${this.id} ; Descripcion: $descripcion ; Estado: $estado ; Fecha realizacion: $fechaFormateada"
-//        }
-//        return "ID: $id ; Descripcion: $descripcion ; Estado: $estado"
-//    }
 
 }

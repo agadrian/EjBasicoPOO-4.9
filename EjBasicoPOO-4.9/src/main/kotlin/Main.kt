@@ -19,33 +19,116 @@
  * }
  */
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
 fun main() {
 
-    // Test
-    //val tarea1 = Tarea(1, Tarea.Estado.PENDIENTE, "Primera tarea")
-    //println( tarea1.toString())
+    var opc: Int
+    val lista = ListaTareas()
 
-    val tareas = ListaTareas()
-    tareas.agregarTarea("Tarea 2")
-    tareas.agregarTarea("Tarea 3")
-    tareas.agregarTarea("Tarea 4")
-    tareas.agregarTarea("Tarea 5")
-    tareas.agregarTarea("Tarea 6")
+    do {
+        mostrarMenu()
+        opc = pedirOpc(0,6)
 
-    println("Cambiado estado...")
-    tareas.cambiarEstado(2)
-    tareas.cambiarEstado(3)
-    tareas.cambiarEstado(5)
+        when (opc){
+            1 -> {
+                lista.agregarTarea(pedirDescripcion())
+            }
 
-    tareas.mostrarTodasTareas()
-    tareas.mostrarTareasPend()
-    tareas.mostrarTareasRealizadas()
+            2 -> {
+                lista.eliminarTarea(pedirID())
+            }
+
+            3 -> {
+                lista.cambiarEstado(pedirID())
+            }
+
+            4 -> {
+                lista.mostrarTodasTareas()
+            }
+
+            5 -> {
+                lista.mostrarTareasPend()
+            }
+
+            6 -> {
+                lista.mostrarTareasRealizadas()
+            }
+
+        }
+
+    }while (opc != 0)
+
+}
+
+fun mostrarMenu(){
+    println("\nMenu Tareas\n-----------")
+    println("1.- Agregar tarea")
+    println("2.- Eliminar tarea")
+    println("3.- Cambiar estado tarea")
+    println("4.- Mostrar todas las tareas")
+    println("5.- Mostrar tareas pendientes")
+    println("6.- Mostrar tareas realizadas")
+    println("0.- Salir\n")
+}
 
 
+/**
+ * Pide introducir una opcion y comprueba que este dentro de un rango dado
+ * @param min Numero minimo del rango de opciones
+ * @param max Numero maximo del rango de opciones
+ * @return opcion - Int: Retorna la opcion elegida
+ */
+fun pedirOpc(min: Int, max: Int) : Int{
+    var opcion: Int
 
+    do {
+        print("Seleccione la opcion (0 = SALIR) >> ")
 
+        opcion = try {
+            readln().toInt()
+        } catch (e: NumberFormatException) {
+            println("**OPCION NO VALIDA**")
+            -1
+        }
 
+        if (opcion !in min..max) {
+            println("OPCION NO VALIDA")
+        }
+    } while (opcion !in min..max)
+
+    return opcion
+}
+
+/**
+ * Pide una descripcion para añadir a la creacion de la tarea
+ * @return Cadena de caracteres de la descripcion introducida
+ */
+fun pedirDescripcion(): String {
+    println("Introduce la descripcion de la tarea: ")
+    return readln()
+}
+
+/**
+ * Pide la ID de la tarea y llama a otra funcion para validarla
+ * @return Int del numero de la ID introducida
+ */
+fun pedirID(): Int{
+    println("Introduce ID de la tarea: ")
+    return pedirIntPositivo()
+}
+
+/**
+ * Comprueba que el valor introducido es numerico y positivo. Sigue pidiendolo hasta ser valido.
+ * @return El numero introducido valido
+ */
+fun pedirIntPositivo(): Int{
+    var num: Int?
+
+    do {
+        val valor = readln()
+        num = valor.toIntOrNull()
+
+        if (num == null || num < 1) println("Debes introducir un numero entero positivo: ")
+
+    }while (num == null || num < 1)
+    return num
 }
